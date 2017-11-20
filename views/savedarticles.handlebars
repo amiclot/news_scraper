@@ -2,8 +2,7 @@
 <div class = 'container'>
 	<div class = 'row'>
 		<div class = 'col-md-8'>
-			<h1 class = 'mx-auto'>News Scraper</h1>
-			<a href = '/savedarticles'><h2> View Saved Articles</h2></a>
+			<h1 class = 'mx-auto'>Saved Articles</h1>
 
 
 {{#each article}}
@@ -12,14 +11,12 @@
 		<a data-id = {{this._id}} href = {{this.link}}><h2>{{this.title}}</h2></a>
 	    <img src= {{this.img}} class= img-fluid>
 	    <p>{{this.info}}</p>
+	    <p>{{this.note}}</p>
 	    <button class = 'btn btn-info mx-auto' data-id= {{this._id}}>Add Comment</button>
 
 	</div>
 {{/each}}
-		</div>
-		<div class = 'col-md-4'>
-			<div id="notes"></div>
-		</div
+
 
 
 	</div>

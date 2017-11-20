@@ -36,7 +36,7 @@ app.set("view engine", "handlebars");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/jj_news_scrapper", {
+mongoose.connect("mongodb://localhost/yungjj_news_scrapper", {
   useMongoClient: true
 });
 
@@ -58,6 +58,28 @@ app.get('/', function(req, res){
       res.json(err);
     });
 })
+
+app.get('/savedarticles', function(req, res){
+  db.Article.find({note:{$exists: true}}).then(function(results) {
+      if(results.length !== 0){
+        var data = {
+          article: results
+        }
+        res.render("savedarticles", data);
+      }else{
+        res.render("savedarticles");
+      }
+
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+})
+
+
+
+
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res)
 {
@@ -110,13 +132,12 @@ app.get("/scrape2", function(req, res)
             var info = $(element).find("div.entry-content").find("p").text();
             var img = $(element).find("img").attr("src");
             var link = $(element).find("h2.entry-title").find("a").attr("href");
-            var site = "attacktheback";
+            
 
             var article = 
             {
                 title: title,
                 info: info,
-                site: site,
                 img: img,
                 link: link
             }
