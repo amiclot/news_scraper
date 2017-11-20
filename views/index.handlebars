@@ -1,13 +1,25 @@
-<h1>Weeee</h1>
+
+<div class = 'container'>
+	<div class = 'row'>
+		<div class = 'col-md-8'>
+			<h1 class = 'mx-auto'>News Scraper</h1>
 
 
 {{#each article}}
 
-	<div id="wrapper">
-	      <h1>{{this.title}}</h1>
-	      <p>{{this.info}}</p>
-	      <p>{{this.link}}</p>
-	      <p>{{this.img}}</p>
+	<div class="card">
+		<a data-id = {{this._id}} href = {{this.link}}><h2>{{this.title}}</h2></a>
+	    <img src= {{this.img}} class= img-fluid>
+	    <p>{{this.info}}</p>
+	    <button class = 'btn btn-info mx-auto' data-id= {{this._id}}>Add Comment</button>
 
 	</div>
 {{/each}}
+		</div>
+		<div class = 'col-md-4'>
+			<div id="notes"></div>
+		</div
+
+
+	</div>
+</div>

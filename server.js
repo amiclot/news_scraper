@@ -73,6 +73,7 @@ app.get("/scrape", function(req, res)
             var img = $(element).find("img").attr("src");
             var link = $(element).find("div.iten-right").find("h3").find("a").attr("href");
             
+
             var article = 
             {
                 title: title,
@@ -109,11 +110,13 @@ app.get("/scrape2", function(req, res)
             var info = $(element).find("div.entry-content").find("p").text();
             var img = $(element).find("img").attr("src");
             var link = $(element).find("h2.entry-title").find("a").attr("href");
-            
+            var site = "attacktheback";
+
             var article = 
             {
                 title: title,
                 info: info,
+                site: site,
                 img: img,
                 link: link
             }
