@@ -15,7 +15,7 @@ var db = require("./models");
 
 // Initialize Express
 var app = express();
-
+//router for when moved to controller folder
 var router = express.Router();
 
 // Configure middleware
@@ -27,6 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Use express.static to serve the public folder as a static directory
 app.use(express.static("public"));
 
+// Set Handlebars.
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
@@ -35,10 +41,27 @@ mongoose.connect("mongodb://localhost/jj_news_scrapper", {
 });
 
 // Routes
+app.get('/', function(req, res){
+  db.Article.find({}).then(function(results) {
+      if(results.length !== 0){
+        var data = {
+          article: results
+        }
+        res.render("index", data);
+      }else{
+        res.render("index");
+      }
 
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+})
 // A GET route for scraping the echojs website
 app.get("/scrape", function(req, res)
 {
+  var article = {};
     request("http://www.graciemag.com/en/", function(err, request, html)
     {
         if(err){throw err}
@@ -57,6 +80,8 @@ app.get("/scrape", function(req, res)
                 img: img,
                 link: link
             }
+
+            
             db.Article.create(article).then(function(result)
             {
                 console.log("Article Added!")
@@ -65,7 +90,9 @@ app.get("/scrape", function(req, res)
             {
                 res.json(err);
             });
+            
         });
+
     });
 
 });
@@ -90,6 +117,8 @@ app.get("/scrape2", function(req, res)
                 img: img,
                 link: link
             }
+
+
             db.Article.create(article).then(function(result)
             {
                 console.log("Article Added!")
@@ -155,6 +184,8 @@ app.post("/articles/:id", function(req, res) {
       res.json(err);
     });
 });
+
+
 
 // Start the server
 app.listen(PORT, function() {
