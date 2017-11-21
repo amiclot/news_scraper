@@ -44,7 +44,7 @@ mongoose.connect(MONGODB_URI, {
 
 // Routes
 app.get('/', function(req, res){
-  db.Article.find({}).then(function(results) {
+  db.Article.find({}).populate("note").then(function(results) {
       if(results.length !== 0){
         var data = {
           article: results
@@ -62,7 +62,7 @@ app.get('/', function(req, res){
 })
 
 app.get('/savedarticles', function(req, res){
-  db.Article.find({note:{$exists: true}}).then(function(results) {
+  db.Article.find({note:{$exists: true}}).populate("note").then(function(results) {
       if(results.length !== 0){
         var data = {
           article: results
