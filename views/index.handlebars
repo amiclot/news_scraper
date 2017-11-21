@@ -14,7 +14,11 @@
 	    <p>{{this.info}}</p>
 	    <button class = 'btn btn-info mx-auto' id = "commentbtn" data-id= {{this._id}}>Add Comment</button>
 	    <h4>Comments:</h4>
-	    <p>{{this.note.title}}</p>
+	    <div class="card">
+		    <p>Date: {{this.note.date}}</p>
+		    <p>Title: {{this.note.title}}</p>
+		    <p>Comment: {{this.note.body}}</p>
+		</div>
 
 	</div>
 {{/each}}

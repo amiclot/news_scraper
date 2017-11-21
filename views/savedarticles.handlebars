@@ -12,7 +12,11 @@
 	    <img src= {{this.img}} class= img-fluid>
 	    <p>{{this.info}}</p>
 	    <h4>Comments:</h4>
-	    <p>{{this.note.title}}</p>
+	    <div class="card">
+		    <p>Date: {{this.note.date}}</p>
+		    <p>Title: {{this.note.title}}</p>
+		    <p>Comment: {{this.note.body}}</p>
+		</div>
 
 	</div>
 {{/each}}
