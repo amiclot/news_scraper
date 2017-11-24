@@ -47,7 +47,8 @@ app.get('/', function(req, res){
   db.Article.find({}).populate("note").then(function(results) {
       if(results.length !== 0){
         var data = {
-          article: results
+          article: results,
+          comment: results.note
         }
         res.render("index", data);
       }else{

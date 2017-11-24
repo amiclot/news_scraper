@@ -6,22 +6,31 @@
 			<a href = '/savedarticles'><h2> View Saved Articles</h2></a>
 
 
-{{#each article}}
+			{{#each article}}
 
-	<div class="card">
-		<a data-id = {{this._id}} href = {{this.link}}><h2>{{this.title}}</h2></a>
-	    <img src= {{this.img}} class= img-fluid>
-	    <p>{{this.info}}</p>
-	    <button class = 'btn btn-info mx-auto' id = "commentbtn" data-id= {{this._id}}>Add Comment</button>
-	    <h4>Comments:</h4>
-	    <div class="card">
-		    <p>Date: {{this.note.date}}</p>
-		    <p>Title: {{this.note.title}}</p>
-		    <p>Comment: {{this.note.body}}</p>
-		</div>
+				<div class="card">
+					<a data-id = {{this._id}} href = {{this.link}}><h2>{{this.title}}</h2></a>
+				    <img src= {{this.img}} class= img-fluid>
+				    <p>{{this.info}}</p>
+				    <button class = 'btn btn-info mx-auto' id = "commentbtn" data-id= {{this._id}}>Add Comment</button>
+				    <h4>Comments:</h4>
+				    <div class="card">
+					    <p>Date: {{this.note.date}}</p>
+					    <p>Title: {{this.note.title}}</p>
+					    <p>Comment: {{this.note.body}}</p>
+					</div>
 
-	</div>
-{{/each}}
+				</div>
+			{{/each}}
+
+			{{#each comment}}
+				<p>Date: {{this.date}}</p>
+				<p>Title: {{this.title}}</p>
+				<p>Comment: {{this.body}}</p>
+
+			{{/each}}
+
+
 		</div>
 		<div class = 'col-md-4'>
 			<div id="notes"></div>
